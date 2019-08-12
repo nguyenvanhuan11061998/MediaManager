@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="My account">
+
+        <menu>
+
+            <item android:id="@+id/nav_setting_account"
+                android:title="Setting Account"></item>
+        </menu>
+
+    </item>
+
+
+    <group android:checkableBehavior="all">
+        <item android:id="@+id/nav_image"
+            android:title="@string/myPhoto"
+            android:icon="@drawable/ic_photo"></item>
+
+        <item android:id="@+id/nav_video"
+            android:title="@string/myVideo"
+            android:icon="@drawable/ic_video"></item>
+
+        <item android:id="@+id/nav_music"
+            android:title="@string/myMusic"
+            android:icon="@drawable/ic_music"></item>
+    </group>
+
+    <item android:title="">
+
+        <menu>
+
+            <item android:id="@+id/nav_User_manual"
+                android:title="User manual"></item>
+
+            <item android:id="@+id/nav_information"
+                android:title="Information"></item>
+
+        </menu>
+
+    </item>
+
+
+</menu>

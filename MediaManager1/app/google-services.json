@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "16226825056",
+    "firebase_url": "https://mediamanager-b7cbc.firebaseio.com",
+    "project_id": "mediamanager-b7cbc",
+    "storage_bucket": "mediamanager-b7cbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16226825056:android:742ce005cd348cac",
+        "android_client_info": {
+          "package_name": "com.t3h.mediamanager1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16226825056-u5mod1a5j3rjcnokjstrct76r7am0ql9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxNy768ie6rubzYdmEtxstqUxI5UVQHNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16226825056-u5mod1a5j3rjcnokjstrct76r7am0ql9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
