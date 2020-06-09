@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.activity;
+package com.t3h.mediamanager1.register;
 
 import android.content.Intent;
 import android.view.View;
@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.t3h.mediamanager1.R;
 import com.t3h.mediamanager1.Utils.ValidatorUtils;
+import com.t3h.mediamanager1.activity.MainActivity;
 import com.t3h.mediamanager1.base.BaseActivity;
 import com.t3h.mediamanager1.dao.ShareHelper;
 import com.t3h.mediamanager1.databinding.ActivityRegisterBinding;
@@ -53,7 +54,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> impl
                         helper.set(ShareHelper.Keys.PASSWORD,binding.edtPassword.getText().toString());
                         helper.set(ShareHelper.Keys.HINT,binding.edtPassword.getText().toString());
 
-                        Intent intent = new Intent(this,MainActivity.class);
+                        Intent intent = new Intent(this, MainActivity.class);
                         startActivity(intent);
                         finish();
 

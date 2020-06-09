@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+
 
 public abstract class BaseActivity<BD extends ViewDataBinding> extends AppCompatActivity {
 
@@ -15,6 +17,7 @@ public abstract class BaseActivity<BD extends ViewDataBinding> extends AppCompat
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,getLayoutId());
+        ButterKnife.bind(this);
         initAct();
     }
 

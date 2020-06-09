@@ -16,6 +16,8 @@ import com.t3h.mediamanager1.activity.MainActivity;
 import com.t3h.mediamanager1.activity.PlayModelActivity;
 import com.t3h.mediamanager1.dao.SystemData;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseFragment <BD extends ViewDataBinding> extends Fragment {
 
     protected BD binding;
