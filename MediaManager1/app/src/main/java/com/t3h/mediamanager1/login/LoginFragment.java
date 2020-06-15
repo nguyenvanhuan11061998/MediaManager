@@ -66,7 +66,6 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
             case R.id.tv_sign_up:
                 Intent intent = new Intent(getActivity(), RegisterActivity.class);
                 startActivity(intent);
-                getActivity().finish();
                 break;
 
             case R.id.btn_login:

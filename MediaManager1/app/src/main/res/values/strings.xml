@@ -26,4 +26,10 @@
     <string name="ban_chua_nhap_email">Bạn chưa nhập email</string>
     <string name="dang_nhap_thanh_cong">Đăng nhập thành công</string>
     <string name="ban_da_nhap_sai_ten_dang_nhap_hoac_mat_khau">Bạn đã nhập sai tên đăng nhập hoặc mật khẩu.</string>
+    <string name="ten_dang_nhap_phai_chua_nhieu_hon_8_ky_tu">Tên đăng nhập phải nhiều hơn 8 ký tự!</string>
+    <string name="mat_khau_phai_nhieu_hon_hoac_bang_8_ky_tu">Mật khẩu phải nhiều hơn hoặc bằng 8 ký tự!</string>
+    <string name="mat_khau_xac_nhan_khong_chinh_xac">Mật khẩu xác nhận không chính xác!</string>
+    <string name="vui_long_nhap_so_dien_thoai_cua_ban">Vui lòng nhập số điện thoại của bạn</string>
+    <string name="vui_long_nhap_email_cua_ban">Vui lòng nhập email của bạn!</string>
+    <string name="vui_long_nhap_cac_thong_tin_can_thiet">Vui lòng nhập các thông tin cần thiết!</string>
 </resources>

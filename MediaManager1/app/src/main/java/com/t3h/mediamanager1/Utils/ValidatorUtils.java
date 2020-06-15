@@ -2,6 +2,7 @@ package com.t3h.mediamanager1.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -58,8 +59,11 @@ public class ValidatorUtils {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) activity.getSystemService(
                         Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
+        View forcusView = activity.getCurrentFocus();
+        if (forcusView  != null) {
+            inputMethodManager.hideSoftInputFromWindow(
+                    forcusView.getWindowToken(), 0);
+        }
     }
 
 

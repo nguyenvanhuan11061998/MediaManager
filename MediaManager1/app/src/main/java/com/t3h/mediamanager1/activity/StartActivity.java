@@ -2,31 +2,41 @@ package com.t3h.mediamanager1.activity;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 
 import com.t3h.mediamanager1.R;
+import com.t3h.mediamanager1.Utils.ValidatorUtils;
 import com.t3h.mediamanager1.base.BaseActivity;
 import com.t3h.mediamanager1.dao.ShareHelper;
 import com.t3h.mediamanager1.databinding.ActivityStartBinding;
 import com.t3h.mediamanager1.login.LoginActivity;
+import com.t3h.mediamanager1.models.UserModel;
 import com.t3h.mediamanager1.register.RegisterActivity;
 
 public class StartActivity extends BaseActivity<ActivityStartBinding> {
+    public static final String COME_FROM_START_ACT = "false";
 
-    String check = null;
+    boolean check = false;
 
     @Override
     protected void initAct() {
-        ShareHelper shareHelper = new ShareHelper(this);
-        check = shareHelper.get(ShareHelper.Keys.PASSWORD,"");
+        UserModel userModel = new UserModel();
+        userModel = ValidatorUtils.loadModel(this);
+        if (userModel.getUserName() != null){
+            check = true;
+        } else {
+            check = false;
+        }
         Handler handler = new Handler();                                                                  //tạo một handler để chạy SplashActivity
         handler.postDelayed(new Runnable() {
             Intent intent;
             @Override
             public void run() {
-                if (check != ""){
+                if (check){
                     intent = new Intent(StartActivity.this, LoginActivity.class);
-                }else {
+                } else {
                     intent = new Intent(StartActivity.this, RegisterActivity.class);
+                    intent.putExtra(COME_FROM_START_ACT, true);
                 }
                 startActivity(intent);
                 finish();

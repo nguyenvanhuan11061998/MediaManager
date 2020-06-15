@@ -35,6 +35,17 @@
         android:focusable="true"
         android:focusableInTouchMode="true"/>
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_username_wrong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ten_dang_nhap_phai_chua_nhieu_hon_8_ky_tu"
+        android:textSize="10sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorRed"/>
+
     <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
@@ -48,6 +59,18 @@
         android:padding="16dp"
         android:textSize="12sp"
         android:inputType="textPassword"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_password_wrong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mat_khau_phai_nhieu_hon_hoac_bang_8_ky_tu"
+        android:textSize="10sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorRed"/>
+
 
     <EditText
         android:id="@+id/edt_reset_password"
@@ -63,6 +86,17 @@
         android:textSize="12sp"
         android:inputType="textPassword"/>
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_again_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mat_khau_xac_nhan_khong_chinh_xac"
+        android:textSize="10sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorRed"/>
+
     <EditText
         android:id="@+id/edt_your_phone"
         android:layout_width="match_parent"
@@ -74,7 +108,19 @@
         android:background="@drawable/custom_round_corner_edittext"
         android:hint="@string/your_phone"
         android:padding="16dp"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:inputType="number"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_your_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/vui_long_nhap_so_dien_thoai_cua_ban"
+        android:textSize="10sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorRed"/>
 
     <EditText
         android:id="@+id/edt_your_email"
@@ -88,6 +134,17 @@
         android:hint="@string/your_email"
         android:padding="16dp"
         android:textSize="12sp" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_your_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/vui_long_nhap_email_cua_ban"
+        android:textSize="10sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorRed"/>
 
     <Button
         android:id="@+id/btn_sign_up"
