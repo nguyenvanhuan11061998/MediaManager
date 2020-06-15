@@ -19,4 +19,11 @@
     <string name="reset_password">Reset password</string>
     <string name="your_phone">Your phone</string>
     <string name="or_sign_up_with">Or sign up with</string>
+    <string name="ban_chua_nhap_ten_dang_nhap">Bạn chưa nhập tên đăng nhập!</string>
+    <string name="ban_chua_nhap_mat_khau">Bạn chưa nhập mật khẩu!</string>
+    <string name="ban_chua_nhap_mat_khau_xac_nhan">Bạn chưa nhập mật khẩu xác nhận!</string>
+    <string name="ban_chua_nhap_so_dien_thoai">Bạn chưa nhập số điện thoại!</string>
+    <string name="ban_chua_nhap_email">Bạn chưa nhập email</string>
+    <string name="dang_nhap_thanh_cong">Đăng nhập thành công</string>
+    <string name="ban_da_nhap_sai_ten_dang_nhap_hoac_mat_khau">Bạn đã nhập sai tên đăng nhập hoặc mật khẩu.</string>
 </resources>

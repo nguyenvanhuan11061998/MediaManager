@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     private FragmentMusic fmMusic = new FragmentMusic();
     private FragmentVideo fmVideo = new FragmentVideo();
     private FragmentImage fmImage = new FragmentImage();
-    private FragmentStart fmStart = new FragmentStart();
+    private FragmentStart fmStart;
 
     @Override
     protected int getLayoutId() {
@@ -53,10 +53,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         return fmImage;
     }
 
-    public FragmentStart getFmStart() {
-        return fmStart;
-    }
-
     public Fragment getCurrentFm;
 
     private final String[] PERRMISSION = {
@@ -67,7 +63,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-
             MusicService.MusicBinder binder = (MusicService.MusicBinder) service;                                       //đưa service vào application context
             App app = (App)  getApplicationContext();
             app.setService(binder.getService());
@@ -85,7 +80,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         transaction.add(R.id.panel,fmMusic);
         transaction.add(R.id.panel,fmVideo);
         transaction.add(R.id.panel,fmImage);
-        transaction.add(R.id.panel,fmStart);
         transaction.commitAllowingStateLoss();
 
     }
@@ -93,7 +87,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
 
     public void showFragment(Fragment fm){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.panel,fm);
+        if (fm != null){
+            transaction.replace(R.id.panel, fm);
+        } else {
+            transaction.add(R.id.panel, fm);
+        }
         transaction.commitAllowingStateLoss();
         getCurrentFm = fm;
     }
@@ -105,8 +103,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
             return true;
         }
         for (String p : PERRMISSION){
-            int accept = checkSelfPermission(p);
-            if (accept ==PackageManager.PERMISSION_DENIED){
+            if (checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED){
+                requestPermissions(PERRMISSION,0);
                 return false;
             }
         }
@@ -138,7 +136,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         toggle.syncState();
         binding.navView.setNavigationItemSelectedListener(this);
 
-        initFrm();
+        fmStart = FragmentStart.getInstance();
+        showFragment(fmStart);
+//        initFrm();
 
     }
 
@@ -165,7 +165,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
 
     @Override
     public void onBackPressed() {
-        if (getCurrentFm != getFmStart()){
+        if (getCurrentFm != fmStart){
             showFragment(fmStart);
         }else {
             super.onBackPressed();

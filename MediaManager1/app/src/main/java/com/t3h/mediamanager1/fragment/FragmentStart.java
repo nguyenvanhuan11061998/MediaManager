@@ -22,6 +22,10 @@ public class FragmentStart extends BaseFragment<FragmentStartBinding> implements
         return R.layout.fragment_start;
     }
 
+    public static FragmentStart getInstance(){
+        return new FragmentStart();
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

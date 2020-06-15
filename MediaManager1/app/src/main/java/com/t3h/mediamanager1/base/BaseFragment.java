@@ -29,15 +29,14 @@ public abstract class BaseFragment <BD extends ViewDataBinding> extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+        ButterKnife.bind(this,binding.getRoot());
         return binding.getRoot();
-
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         systemData = new SystemData(getContext());
-
         app = (App) getContext().getApplicationContext();
     }
 

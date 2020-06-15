@@ -33,4 +33,33 @@ public class ShareHelper {
         }
         editor.commit();
     }
+
+    /**
+     * key save infor login
+     */
+    public enum KeysUserModel {
+        USERNAME,
+        PASSWORD,
+        PHONE,
+        EMAIL,
+        HINT
+    }
+    public String getKeyUserModel(KeysUserModel k, String defaultValue){
+        return share.getString(k.toString(),defaultValue);
+    }
+
+    public void setKeyUserModel(KeysUserModel k, String defaultValue){
+        SharedPreferences.Editor editor = share.edit();
+        editor.putString(k.toString(),defaultValue);
+        editor.commit();
+    }
+
+    public void removeKeyUserModel (KeysUserModel ... keysUserModels){
+        SharedPreferences.Editor editor = share.edit();
+        for (KeysUserModel k: keysUserModels) {
+            editor.remove(k.toString());
+        }
+        editor.commit();
+    }
+
 }

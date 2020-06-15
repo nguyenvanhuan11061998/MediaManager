@@ -16,13 +16,12 @@ import com.t3h.mediamanager1.base.BaseActivity;
 import com.t3h.mediamanager1.dao.ShareHelper;
 import com.t3h.mediamanager1.databinding.ActivityLoginBinding;
 
-public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements View.OnClickListener {
+public class LoginActivity extends BaseActivity<ActivityLoginBinding>{
 
     private LoginFragment loginFragment;
 
     @Override
     protected void initAct() {
-        binding.btnLogin.setOnClickListener(this);
         if (loginFragment == null){
             loginFragment = LoginFragment.getInstance();
         }
@@ -39,22 +38,5 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> implements
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.panel_login_act,fragment);
         transaction.commitAllowingStateLoss();
-    }
-
-    @Override
-    public void onClick(View v) {
-        ShareHelper helper = new ShareHelper(this);
-        String password = helper.get(ShareHelper.Keys.PASSWORD,"");
-        String pass = binding.edtPasswordLogin.getText().toString();
-
-        if (pass.equals(password)){
-            Intent intent = new Intent(this, MainActivity.class);
-            Toast.makeText(this,"Đăng nhập thành công",Toast.LENGTH_LONG).show();
-            startActivity(intent);
-            finish();
-        }else {
-            Toast.makeText(this,"Mật khẩu không đúng !",Toast.LENGTH_LONG).show();
-            return;
-        }
     }
 }
