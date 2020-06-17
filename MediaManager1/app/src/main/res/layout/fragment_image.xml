@@ -20,8 +20,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
@@ -56,64 +55,72 @@
         </RelativeLayout>
 
 
-        <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"
-            android:id="@+id/lv_photo"
-            app:spanCount="4"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/ll_fm_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimary"
-            android:visibility="visible">
-
-            <RelativeLayout
-                android:padding="10dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{(v) -> listener.onClickHilder()}">
-
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dấu Ảnh"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorWhile"/>
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorWhile"></View>
-
-            <RelativeLayout
-                android:padding="10dp"
-                android:layout_width="0dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="@{(v) -> listener.onClickDelete()}">
+                android:id="@+id/lv_photo"
+                app:spanCount="3"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/ll_fm_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="@{(v) -> listener.onClickHilder()}">
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dấu Ảnh"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhile"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorWhile"></View>
+
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Xóa Ảnh"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorWhile"/>
+                    android:layout_weight="1"
+                    android:onClick="@{(v) -> listener.onClickDelete()}">
 
-            </RelativeLayout>
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Xóa Ảnh"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhile"/>
 
-        </LinearLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
 
     </LinearLayout>

@@ -32,4 +32,6 @@
     <string name="vui_long_nhap_so_dien_thoai_cua_ban">Vui lòng nhập số điện thoại của bạn</string>
     <string name="vui_long_nhap_email_cua_ban">Vui lòng nhập email của bạn!</string>
     <string name="vui_long_nhap_cac_thong_tin_can_thiet">Vui lòng nhập các thông tin cần thiết!</string>
+    <string name="he_thong_ban_vui_long_thu_lai_sau">Hệ thống bận, vui lòng thử lại sau.</string>
+    <string name="ten_nhap_da_ton_tai_vui_long_nhap_ten_dang_nhap_khac">Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác.</string>
 </resources>

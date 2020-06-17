@@ -2,17 +2,14 @@ package com.t3h.mediamanager1.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.t3h.mediamanager1.R;
@@ -20,7 +17,6 @@ import com.t3h.mediamanager1.Utils.AsteriskPasswordTransformationMethod;
 import com.t3h.mediamanager1.Utils.ValidatorUtils;
 import com.t3h.mediamanager1.activity.MainActivity;
 import com.t3h.mediamanager1.base.BaseFragment;
-import com.t3h.mediamanager1.dao.ShareHelper;
 import com.t3h.mediamanager1.databinding.FragmentLoginBinding;
 import com.t3h.mediamanager1.models.UserModel;
 import com.t3h.mediamanager1.register.RegisterActivity;
@@ -28,7 +24,7 @@ import com.t3h.mediamanager1.register.RegisterActivity;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
+public class LoginFragment extends BaseFragment<FragmentLoginBinding> implements LoginContract.View{
 
     @BindView(R.id.edt_user_name)
     EditText userNameEditText;
@@ -38,6 +34,8 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
     FrameLayout fragmentLoginLayout;
     @BindView(R.id.img_show_password)
     ImageView showPasswordImageView;
+
+    private LoginPresenter mPresenter;
 
     private boolean isShowPass = false;
 
@@ -57,6 +55,7 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
     }
 
     private void intFm() {
+        mPresenter = new LoginPresenter(this);
         setupUI(fragmentLoginLayout);
     }
 
@@ -94,19 +93,10 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
             Toast.makeText(getContext(), R.string.ban_chua_nhap_mat_khau,Toast.LENGTH_SHORT).show();
             return;
         } else {
-            UserModel userModel = ValidatorUtils.loadModel(getContext());
-            if ((userNameEditText.getText().toString().equals(userModel.getUserName()))
-                    && passwordEditText.getText().toString().equals(userModel.getPassword())) {
-                Toast.makeText(getContext(), R.string.dang_nhap_thanh_cong, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            } else {
-                Toast.makeText(getContext(),R.string.ban_da_nhap_sai_ten_dang_nhap_hoac_mat_khau, Toast.LENGTH_SHORT).show();
-                return;
-            }
+            mPresenter.callApiLogin(userNameEditText.getText().toString(),passwordEditText.getText().toString());
         }
     }
+
 
     public void setupUI(View view) {
 
@@ -127,5 +117,24 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding> {
                 setupUI(innerView);
             }
         }
+    }
+
+    @Override
+    public void callApiLoginSuccess(UserModel userModel) {
+        Toast.makeText(getContext(), R.string.dang_nhap_thanh_cong, Toast.LENGTH_SHORT).show();
+        ValidatorUtils.setUserModel(getContext(),userModel);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void callApiLoginFailed(String message) {
+        Toast.makeText(getContext(),message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void callApiLoginFailed() {
+        Toast.makeText(getContext(),R.string.he_thong_ban_vui_long_thu_lai_sau, Toast.LENGTH_SHORT).show();
     }
 }

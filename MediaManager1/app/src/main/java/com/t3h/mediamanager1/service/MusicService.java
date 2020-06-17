@@ -254,8 +254,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     realese();
                     isLife.postValue(false);
                     stopSelf();
-
-
                     break;
             }
         }

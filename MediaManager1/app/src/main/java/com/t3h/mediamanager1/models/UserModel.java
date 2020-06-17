@@ -1,9 +1,21 @@
 package com.t3h.mediamanager1.models;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class UserModel {
+
+    @SerializedName("user")
+    @Expose
     private String userName;
+    @SerializedName("pass")
+    @Expose
     private String password;
+    @SerializedName("email")
+    @Expose
     private String mPhone;
+    @SerializedName("phone")
+    @Expose
     private String mEmail;
 
     public String getUserName() {

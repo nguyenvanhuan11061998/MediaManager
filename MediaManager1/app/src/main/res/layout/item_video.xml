@@ -15,6 +15,7 @@
     </data>
 
     <LinearLayout
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -33,19 +34,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
+                <com.t3h.mediamanager1.Utils.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scaleType="fitXY"
-                        app:thumb="@{item.getData()}"/>
-
-                </LinearLayout>
+                    app:thumb="@{item.getData()}"
+                    android:scaleType="fitXY"/>
 
                 <ImageView
                     android:layout_width="30dp"

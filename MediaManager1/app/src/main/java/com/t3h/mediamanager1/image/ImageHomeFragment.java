@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.fragment;
+package com.t3h.mediamanager1.image;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,13 +22,14 @@ import com.t3h.mediamanager1.base.BaseAdapter;
 import com.t3h.mediamanager1.base.BaseFragment;
 import com.t3h.mediamanager1.databinding.FragmentImageBinding;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
+import com.t3h.mediamanager1.fragment.MediaListener;
 import com.t3h.mediamanager1.interfaceFragment.ClickFmListener;
 import com.t3h.mediamanager1.models.Image;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class FragmentImage extends BaseFragment<FragmentImageBinding> implements MediaListener<Image>,  ValueEventListener, View.OnClickListener, ClickFmListener {
+public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implements MediaListener<Image>,  ValueEventListener, View.OnClickListener, ClickFmListener {
 
     public static final String EXTRA_PLAY_IMAGE = "extra_play_image";
     private TextView tvCheckAll;
@@ -42,6 +43,8 @@ public class FragmentImage extends BaseFragment<FragmentImageBinding> implements
     private DatabaseReference reference;
     private FileStorage fileStorage;
 
+    private ImageHomePresenter presenter;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_image;
@@ -51,7 +54,9 @@ public class FragmentImage extends BaseFragment<FragmentImageBinding> implements
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        if (presenter == null){
+            presenter = ImageHomePresenter.getInstance();
+        }
         initFm();
 
     }

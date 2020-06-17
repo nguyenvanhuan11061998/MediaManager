@@ -2,11 +2,9 @@ package com.t3h.mediamanager1.register;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -25,7 +23,7 @@ import com.t3h.mediamanager1.models.UserModel;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> {
+public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> implements RegisterContract.View{
 
     @BindView(R.id.edt_user_name)
     EditText userNameEditText;
@@ -51,6 +49,8 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> {
     TextView yourEmailTextView;
     @BindView(R.id.btn_back_register)
     ImageView backRegisterButton;
+    @BindView(R.id.tv_username_exited)
+    TextView usernameExitedTextView;
 
     private boolean checkUserName = false;
     private boolean checkPassword = false;
@@ -59,6 +59,7 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> {
     private boolean checkYourEmail = false;
 
     public boolean comeFromStartAct = false;
+    private RegisterPresenter mPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +73,7 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mPresenter = new RegisterPresenter(this);
         initFm();
     }
 
@@ -92,10 +94,10 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> {
                 } else {
                     if (userNameEditText.getText().toString().length() <= 8){
                         usernameWrongTextView.setVisibility(View.VISIBLE);
+                        usernameExitedTextView.setVisibility(View.GONE);
                         checkUserName = false;
                     } else {
-                        usernameWrongTextView.setVisibility(View.GONE);
-                        checkUserName = true;
+                        mPresenter.callApiCheckAccount(userNameEditText.getText().toString());
                     }
                 }
             }
@@ -257,5 +259,26 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> {
                 setupUI(innerView);
             }
         }
+    }
+    @Override
+    public void onAccountNotExited() {
+        checkUserName = true;
+        usernameWrongTextView.setVisibility(View.GONE);
+        usernameExitedTextView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onAccountExited(String messager) {
+        usernameWrongTextView.setVisibility(View.GONE);
+        usernameExitedTextView.setVisibility(View.VISIBLE);
+        checkUserName = false;
+    }
+
+    @Override
+    public void callApiFailed() {
+        usernameWrongTextView.setVisibility(View.GONE);
+        usernameExitedTextView.setVisibility(View.GONE);
+        checkUserName = false;
+        Toast.makeText(getContext(),R.string.he_thong_ban_vui_long_thu_lai_sau,Toast.LENGTH_SHORT).show();
     }
 }

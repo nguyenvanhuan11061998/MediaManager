@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.IBinder;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,10 +20,10 @@ import com.t3h.mediamanager1.App;
 import com.t3h.mediamanager1.R;
 import com.t3h.mediamanager1.base.BaseActivity;
 import com.t3h.mediamanager1.databinding.ActivityMainBinding;
-import com.t3h.mediamanager1.fragment.FragmentMusic;
-import com.t3h.mediamanager1.fragment.FragmentImage;
+import com.t3h.mediamanager1.music.FragmentMusic;
+import com.t3h.mediamanager1.image.ImageHomeFragment;
 import com.t3h.mediamanager1.fragment.FragmentStart;
-import com.t3h.mediamanager1.fragment.FragmentVideo;
+import com.t3h.mediamanager1.video.FragmentVideo;
 import com.t3h.mediamanager1.service.MusicService;
 
 
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
     public static final int REQUEST_MAIN = 1;
     private FragmentMusic fmMusic = new FragmentMusic();
     private FragmentVideo fmVideo = new FragmentVideo();
-    private FragmentImage fmImage = new FragmentImage();
+    private ImageHomeFragment fmImage = new ImageHomeFragment();
     private FragmentStart fmStart;
 
     @Override
@@ -49,7 +49,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         return fmVideo;
     }
 
-    public FragmentImage getFmImage() {
+    public ImageHomeFragment getFmImage() {
         return fmImage;
     }
 

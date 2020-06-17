@@ -19,7 +19,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="2dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -35,20 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
-                <LinearLayout
+                <com.t3h.mediamanager1.Utils.SquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:scaleType="fitXY"
-                            app:thumb="@{item.getData()}" />
-
-                </LinearLayout>
+                    app:thumb="@{item.getData()}"
+                    android:src="@drawable/ic_image_not_data"/>
 
                 <ImageView
                     android:layout_width="30dp"

@@ -11,7 +11,7 @@ public class AppBinding {
     public static void setThumb(ImageView im, String img){
         Glide.with(im)
                 .load(img)
-                .error(R.drawable.ic_music)
+                .error(R.drawable.ic_image_not_data)
                 .into(im);
     }
 

@@ -14,10 +14,10 @@ import com.t3h.mediamanager1.base.BaseActivity;
 import com.t3h.mediamanager1.databinding.ActivityPlayImageBinding;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
 import com.t3h.mediamanager1.fragment.FragmentMyImg;
-import com.t3h.mediamanager1.fragment.FragmentImage;
+import com.t3h.mediamanager1.image.ImageHomeFragment;
 import com.t3h.mediamanager1.fragment.FragmentImagePlay;
 import com.t3h.mediamanager1.fragment.FragmentMyVideo;
-import com.t3h.mediamanager1.fragment.FragmentVideo;
+import com.t3h.mediamanager1.video.FragmentVideo;
 import com.t3h.mediamanager1.fragment.FragmentVideoPlay;
 
 
@@ -59,7 +59,7 @@ public class PlayModelActivity extends BaseActivity<ActivityPlayImageBinding>{
         } else if (index == 4){
             showFmMyVideo();
         } else if (index == 1){
-            data = intent.getStringExtra(FragmentImage.EXTRA_PLAY_IMAGE);
+            data = intent.getStringExtra(ImageHomeFragment.EXTRA_PLAY_IMAGE);
             showFmPlayImg();
         } else if (index == 2){
             data = intent.getStringExtra(FragmentVideo.EXTRA_PLAY_VIDEO);

@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.fragment;
+package com.t3h.mediamanager1.video;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.t3h.mediamanager1.base.BaseFragment;
 import com.t3h.mediamanager1.databinding.FragmentVideoBinding;
 import com.t3h.mediamanager1.dialog.NewFolderDialog;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
+import com.t3h.mediamanager1.fragment.MediaListener;
 import com.t3h.mediamanager1.interfaceFragment.ClickFmListener;
 import com.t3h.mediamanager1.models.Video;
 

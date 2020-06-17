@@ -19,8 +19,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="match_parent"
@@ -54,60 +53,68 @@
 
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="15"
-            android:id="@+id/lv_video"
-            app:spanCount="4"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lv_video"
+                app:spanCount="3"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
 
-        <LinearLayout
-            android:id="@+id/ll_fm_video"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimary"
-            android:visibility="invisible">
+            <LinearLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/ll_fm_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary"
+                android:visibility="gone">
 
-            <RelativeLayout
-                android:padding="10dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{(v) -> listener.onClickHilder()}">
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="@{(v) -> listener.onClickHilder()}">
 
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dấu Video"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorWhile"/>
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dấu Video"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhile"/>
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:padding="10dp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:onClick="@{(v) -> listener.onClickDelete()}">
+                <RelativeLayout
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="@{(v) -> listener.onClickDelete()}">
 
-                <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Xóa Video"
-                    android:textSize="20dp"
-                    android:textColor="@color/colorWhile"/>
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Xóa Video"
+                        android:textSize="20dp"
+                        android:textColor="@color/colorWhile"/>
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-        </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
