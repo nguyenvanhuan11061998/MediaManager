@@ -5,8 +5,11 @@ public interface ChangePasswordContract {
     }
 
     interface View {
+        void changePasswordSuccess(String message);
+        void changePasswordFailed(String message);
     }
 
     interface Presenter {
+        void callApiChangePassword(String username, String oldPass, String newPassword);
     }
 }

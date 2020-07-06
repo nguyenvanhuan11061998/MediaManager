@@ -54,4 +54,5 @@
     <string name="tao_tai_khoan_voi">Tạo tài khoản với</string>
     <string name="mat_khau_khong_chinh_xac">Mật khẩu không chính xác</string>
     <string name="mat_khau_moi_phai_khac_mat_khau_cu">Mật khẩu mới phải khác mật khẩu cũ</string>
+    <string name="xac_nhan_doi_mat_khau">Xác nhận đổi mật khẩu</string>
 </resources>

@@ -26,4 +26,10 @@ public interface MediaApi {
                                        @Field("email") String email,
                                        @Field("phone") String phone);
 
+    @FormUrlEncoded
+    @POST("changePassword.php")
+    Call<SimpleResult> changePassword(@Field("username") String username,
+                                       @Field("old_password") String oldPassword,
+                                       @Field("new_password") String newPassword);
+
 }

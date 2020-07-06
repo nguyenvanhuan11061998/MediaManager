@@ -1,10 +1,8 @@
 package com.t3h.mediamanager1.register.change_password;
 
-import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,11 +13,12 @@ import com.t3h.mediamanager1.R;
 import com.t3h.mediamanager1.Utils.ValidatorUtils;
 import com.t3h.mediamanager1.base.BaseFragmentNew;
 import com.t3h.mediamanager1.customview.UICustomButton;
+import com.t3h.mediamanager1.dialog.SuccessDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ChangePasswordFragment extends BaseFragmentNew {
+public class ChangePasswordFragment extends BaseFragmentNew implements ChangePasswordContract.View{
     @BindView(R.id.edt_old_password)
     EditText oldPasswordEditText;
     @BindView(R.id.edt_new_password)
@@ -45,6 +44,9 @@ public class ChangePasswordFragment extends BaseFragmentNew {
     private boolean checkEnterNewPass = false;
     private boolean checkEnterAgainPass = false;
 
+    private ChangePasswordPresenter mPresenter;
+    private SuccessDialog successDialog;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_change_password;
@@ -56,6 +58,8 @@ public class ChangePasswordFragment extends BaseFragmentNew {
 
     @Override
     protected void initFragment() {
+        mPresenter = new ChangePasswordPresenter(this);
+
         ValidatorUtils.setupHideKeyBroad(getView(),getActivity());
         changePasswordButton.statusDisable();
 
@@ -180,7 +184,65 @@ public class ChangePasswordFragment extends BaseFragmentNew {
             againPasswordView.setVisibility(View.VISIBLE);
             return;
         }
+
+        successDialog = new SuccessDialog(getString(R.string.xac_nhan_doi_mat_khau), new SuccessDialog.OnClickDialogSuccess() {
+            @Override
+            public void onClickConfirmDialog() {
+                String username = ValidatorUtils.loadModel(getContext()).getUserName();
+                mPresenter.callApiChangePassword(username, oldPass, newPasswordEditText.getText().toString());
+                successDialog.dismiss();
+            }
+
+            @Override
+            public void onClickCancleDialog() {
+                successDialog.dismiss();
+            }
+        });
+
+        if (getFragmentManager()!= null){
+            successDialog.show(getFragmentManager(),"");
+        }
+
     }
 
 
+    @Override
+    public void changePasswordSuccess(String message) {
+        successDialog = new SuccessDialog(message, new SuccessDialog.OnClickDialogSuccess() {
+            @Override
+            public void onClickConfirmDialog() {
+                ChangePasswordActivity mActivity = (ChangePasswordActivity) getActivity();
+                mActivity.back();
+                successDialog.dismiss();
+            }
+
+            @Override
+            public void onClickCancleDialog() {
+                ChangePasswordActivity mActivity = (ChangePasswordActivity) getActivity();
+                mActivity.back();
+                successDialog.dismiss();
+            }
+        });
+        if (getFragmentManager()!= null){
+            successDialog.show(getFragmentManager(),"");
+        }
+    }
+
+    @Override
+    public void changePasswordFailed(String message) {
+        successDialog = new SuccessDialog(message, new SuccessDialog.OnClickDialogSuccess() {
+            @Override
+            public void onClickConfirmDialog() {
+                successDialog.dismiss();
+            }
+
+            @Override
+            public void onClickCancleDialog() {
+                successDialog.dismiss();
+            }
+        });
+        if (getFragmentManager()!= null){
+            successDialog.show(getFragmentManager(),"");
+        }
+    }
 }
