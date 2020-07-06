@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Media Galerry</string>
+    <string name="app_name"></string>
     <string name="picture">Picture</string>
     <string name="photo">Photo</string>
     <string name="video">Video</string>
@@ -34,4 +34,14 @@
     <string name="vui_long_nhap_cac_thong_tin_can_thiet">Vui lòng nhập các thông tin cần thiết!</string>
     <string name="he_thong_ban_vui_long_thu_lai_sau">Hệ thống bận, vui lòng thử lại sau.</string>
     <string name="ten_nhap_da_ton_tai_vui_long_nhap_ten_dang_nhap_khac">Tên đăng nhập đã tồn tại, vui lòng nhập tên đăng nhập khác.</string>
+    <string name="dang_xuat">Đăng xuất</string>
+    <string name="anh_he_thong">Ảnh hệ thống</string>
+    <string name="doi_mat_khau">ĐỔI MẬT KHẨU</string>
+    <string name="nhap_mat_khau_cu">Nhập mật khẩu cũ</string>
+    <string name="mat_khau_cu">Mật khẩu cũ</string>
+    <string name="nhap_mat_khau_moi">Nhập mật khẩu mới</string>
+    <string name="mat_khau_moi">Mật khẩu mới</string>
+    <string name="xac_nhan_mat_khau_moi">Xác nhận mật khẩu mới</string>
+    <string name="xac_nhan_mat_khau">Xác nhận mật khẩu</string>
+    <string name="doi_mat_khau_v2">Đổi mật khẩu</string>
 </resources>

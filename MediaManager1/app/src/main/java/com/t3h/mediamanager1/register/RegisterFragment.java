@@ -57,8 +57,6 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> impl
     private boolean checkAgainPass = false;
     private boolean checkYourPhone = false;
     private boolean checkYourEmail = false;
-
-    public boolean comeFromStartAct = false;
     private RegisterPresenter mPresenter;
 
     @Override
@@ -79,11 +77,6 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> impl
 
     private void initFm() {
         setupUI(fragmentRegisterLayout);
-        if (comeFromStartAct){
-            backRegisterButton.setVisibility(View.GONE);
-        } else {
-            backRegisterButton.setVisibility(View.VISIBLE);
-        }
 
         //check username register
         userNameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -204,37 +197,18 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> impl
                 checkYourEmail = true;
             }
         }
-        if (checkUserName&&checkPassword&&checkAgainPass&&checkYourPhone&&checkYourEmail) {
-            // case edt trống.
-            if (ValidatorUtils.stringNullOrEmpty(userNameEditText.getText().toString())) {
-                Toast.makeText(getContext(), R.string.ban_chua_nhap_ten_dang_nhap, Toast.LENGTH_SHORT).show();
-                return;
-            } else if (ValidatorUtils.stringNullOrEmpty(passwordEditText.getText().toString())) {
-                Toast.makeText(getContext(), R.string.ban_chua_nhap_mat_khau, Toast.LENGTH_SHORT).show();
-                return;
-            } else if (ValidatorUtils.stringNullOrEmpty(resetPasswordEditText.getText().toString())) {
-                Toast.makeText(getContext(), R.string.ban_chua_nhap_mat_khau_xac_nhan, Toast.LENGTH_SHORT).show();
-                return;
-            } else if (ValidatorUtils.stringNullOrEmpty(yourPhoneEditText.getText().toString())) {
-                Toast.makeText(getContext(), R.string.ban_chua_nhap_so_dien_thoai, Toast.LENGTH_SHORT).show();
-                return;
-            } else if (ValidatorUtils.stringNullOrEmpty(yourEmailEditText.getText().toString())) {
-                Toast.makeText(getContext(), R.string.ban_chua_nhap_email, Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-                // case xử lý thông tin đăng ký
-                UserModel userModel = new UserModel();
-                userModel.setUserName(userNameEditText.getText().toString());
-                userModel.setPassword(passwordEditText.getText().toString());
-                userModel.setmPhone(yourPhoneEditText.getText().toString());
-                userModel.setmEmail(yourEmailEditText.getText().toString());
+        if (checkUserName && checkPassword && checkAgainPass && checkYourPhone && checkYourEmail) {
+            mPresenter.callApiRegisterNewAccount(userNameEditText.getText().toString(),passwordEditText.getText().toString(),
+                    yourPhoneEditText.getText().toString(),yourEmailEditText.getText().toString());
 
-                ValidatorUtils.setUserModel(getContext(), userModel);
+            // case xử lý thông tin đăng ký
+            UserModel userModel = new UserModel();
 
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
+            ValidatorUtils.setUserModel(getContext(), userModel);
+
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            getActivity().finish();
         } else {
             Toast.makeText(getContext(),R.string.vui_long_nhap_cac_thong_tin_can_thiet,Toast.LENGTH_SHORT).show();
         }
@@ -280,5 +254,31 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding> impl
         usernameExitedTextView.setVisibility(View.GONE);
         checkUserName = false;
         Toast.makeText(getContext(),R.string.he_thong_ban_vui_long_thu_lai_sau,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRegisterNewAccountSuccess(String message) {
+        Toast.makeText(getContext(), message,Toast.LENGTH_SHORT).show();
+
+        UserModel userModel = new UserModel();
+        userModel.setUserName(userNameEditText.getText().toString());
+        userModel.setPassword(passwordEditText.getText().toString());
+        userModel.setmPhone(yourPhoneEditText.getText().toString());
+        userModel.setmEmail(yourEmailEditText.getText().toString());
+        ValidatorUtils.setUserModel(getContext(), userModel);
+
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
+        getActivity().finish();
+    }
+
+    @Override
+    public void onRegisterNewAccountFailed(String message) {
+        Toast.makeText(getContext(), message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRegisterNewAccountFailed() {
+        Toast.makeText(getContext(), R.string.he_thong_ban_vui_long_thu_lai_sau,Toast.LENGTH_SHORT).show();
     }
 }

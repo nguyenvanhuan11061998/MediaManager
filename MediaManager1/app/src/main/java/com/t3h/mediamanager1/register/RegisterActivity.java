@@ -20,11 +20,6 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding> {
         if (registerFragment == null){
             registerFragment = RegisterFragment.getInstance();
         }
-
-        Intent intent = getIntent();
-        if (intent!=null && intent.getExtras()!=null){
-            registerFragment.comeFromStartAct = intent.getExtras().getBoolean(COME_FROM_START_ACT);
-        }
         showFragment(registerFragment);
     }
 

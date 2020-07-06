@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.t3h.mediamanager1.R;
+import com.t3h.mediamanager1.media.music.model.MusicModel;
 import com.t3h.mediamanager1.models.Music;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
 
     private MediaPlayer player;
-    private ArrayList<Music> arrMusic = new ArrayList<>();
+    private ArrayList<MusicModel> arrMusic = new ArrayList<>();
     private int curentIndex;
 
     public static final int NEXT = 1;
@@ -67,7 +68,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
 
-    public void setArrMusic(ArrayList<Music> arrMusic) {
+    public void setArrMusic(ArrayList<MusicModel> arrMusic) {
         this.arrMusic = arrMusic;
     }
 
@@ -104,7 +105,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                     player.setOnCompletionListener(MusicService.this);
 
                     curentIndex = index;
-                    name.postValue(arrMusic.get(index).getTitle());
+                    name.postValue(arrMusic.get(index).getName());
                     isLife.postValue(true);
 
                     startPlay();
@@ -180,7 +181,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
 
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.ui_notification);
-        remoteViews.setTextViewText(R.id.tv_name_music,arrMusic.get(curentIndex).getTitle());
+        remoteViews.setTextViewText(R.id.tv_name_music,arrMusic.get(curentIndex).getName());
 
         if (player.isPlaying()){
             remoteViews.setImageViewResource(R.id.im_state_play,R.drawable.ic_play);

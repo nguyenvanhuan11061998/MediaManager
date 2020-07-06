@@ -39,4 +39,24 @@ public class RegisterPresenter implements RegisterContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void callApiRegisterNewAccount(String username, String password, String email, String phone) {
+        Call<SimpleResult> callApiRegister = ApiUtils.getDataApi().registerAccount(username,password,email,phone);
+        callApiRegister.enqueue(new Callback<SimpleResult>() {
+            @Override
+            public void onResponse(Call<SimpleResult> call, Response<SimpleResult> response) {
+                if (response.body() != null && response.body().getErrorcode() != null && response.body().getErrorcode() != null ){
+                    mView.onRegisterNewAccountSuccess(response.body().getMessage());
+                } else {
+                    mView.onRegisterNewAccountFailed(response.body().getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleResult> call, Throwable t) {
+                mView.onRegisterNewAccountFailed();
+            }
+        });
+    }
 }

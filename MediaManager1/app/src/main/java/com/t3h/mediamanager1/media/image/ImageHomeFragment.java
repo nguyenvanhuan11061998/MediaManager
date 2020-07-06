@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.image;
+package com.t3h.mediamanager1.media.image;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,26 +24,27 @@ import com.t3h.mediamanager1.databinding.FragmentImageBinding;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
 import com.t3h.mediamanager1.fragment.MediaListener;
 import com.t3h.mediamanager1.interfaceFragment.ClickFmListener;
+import com.t3h.mediamanager1.media.image.adapter.ImageAdapter;
+import com.t3h.mediamanager1.media.image.model.ImageHomeModel;
+import com.t3h.mediamanager1.media.show_media.show_image.ShowImageActivity;
 import com.t3h.mediamanager1.models.Image;
 
 import java.io.File;
 import java.util.ArrayList;
 
-public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implements MediaListener<Image>,  ValueEventListener, View.OnClickListener, ClickFmListener {
+public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implements MediaListener<Image>, ValueEventListener, View.OnClickListener, ClickFmListener, ImageAdapter.clickImageListener {
 
     public static final String EXTRA_PLAY_IMAGE = "extra_play_image";
     private TextView tvCheckAll;
     private CheckBox cbAllImg;
     private LinearLayout ll_fm_img;
 
-    private BaseAdapter<Image> adapter;
+    private ImageAdapter adapter;
 
-    private ArrayList<Image> arrImage;
+    private ArrayList<ImageHomeModel> arrImage = new ArrayList<>();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reference;
     private FileStorage fileStorage;
-
-    private ImageHomePresenter presenter;
 
     @Override
     protected int getLayoutId() {
@@ -54,9 +55,6 @@ public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implem
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (presenter == null){
-            presenter = ImageHomePresenter.getInstance();
-        }
         initFm();
 
     }
@@ -72,13 +70,11 @@ public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implem
 
 
         fileStorage = new FileStorage(getContext());
-        adapter = new BaseAdapter<>(getContext(),R.layout.item_image);
+        adapter = new ImageAdapter(getContext(),arrImage);
         binding.lvPhoto.setAdapter(adapter);
-        arrImage = systemData.getImages();
+        arrImage = systemData.getImagesLocal();
 
-        adapter.setData(arrImage);
-
-        adapter.setListener(this);
+        adapter.setArrImage(arrImage);
         reference = database.getReference("Image");
         reference.addValueEventListener(this);
         binding.setListener(this);
@@ -86,6 +82,9 @@ public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implem
 
         tvCheckAll.setOnClickListener(this);
         cbAllImg.setOnClickListener(this);
+
+        adapter.setListener(this);
+
     }
 
 //=================== Xử lý click vào item ========================================================    
@@ -108,10 +107,6 @@ public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implem
         tvCheckAll.setVisibility(View.VISIBLE);
         ll_fm_img.setVisibility(View.VISIBLE);
 
-        for (int i = 0; i < arrImage.size(); i++) {
-            arrImage.get(i).setDisplay(View.VISIBLE);
-            adapter.notifyItemChanged(i);
-        }
         return true;
 
     }
@@ -120,14 +115,7 @@ public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implem
 
     @Override
     public void onClickChecked(Image image) {
-        int index = arrImage.indexOf(image);
-        boolean checked = arrImage.get(index).getChecked();
-        if (checked){
-            arrImage.get(index).setChecked(false);
-        }else {
-            arrImage.get(index).setChecked(true);
-        }
-        adapter.notifyItemChanged(index);
+
     }
 
 
@@ -145,59 +133,25 @@ public class ImageHomeFragment extends BaseFragment<FragmentImageBinding> implem
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cb_all_img:
-                if (cbAllImg.isChecked()){
-                    for (Image img: arrImage) {
-                        img.setChecked(true);
-                    }
-                    adapter.notifyDataSetChanged();
-                }else {
-                    for (Image img: arrImage) {
-                        img.setChecked(false);
-                    }
-                    adapter.notifyDataSetChanged();
-                }
                 break;
         }
     }
 
     @Override
     public void onClickHilder() {
-        boolean check = false;
-        for (Image img : arrImage) {
-            if (img.getChecked()){
-                File file = new File(img.getData());
-                fileStorage.moveImgToInternal(file);
-                check = true;
-            }
-        }
-        if(check){
-            Toast.makeText(getContext(),"Đã dấu ảnh", Toast.LENGTH_LONG).show();
-            initFm();
-        }else {
-            Toast.makeText(getContext(),"Chọn ảnh để dấu",Toast.LENGTH_LONG).show();
-            return;
-        }
     }
 
     @Override
     public void onClickDelete() {
-        boolean check = false;
-        for (Image img : arrImage) {
-            if (img.getChecked()){
-                File file = new File(img.getData());
-                Log.e(" ======= ",file.getPath());
-                check = true;
-                fileStorage.deleteFile(getContext(),file);
-            }
-        }
-        if (check == true){
-            Toast.makeText(getContext()," Đã xóa ảnh", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(getContext(),"Chọn ảnh để xóa",Toast.LENGTH_LONG).show();
-            return;
-        }
-        initFm();
     }
 
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(getActivity(),ShowImageActivity.class);
+    }
 
+    @Override
+    public void onLongClick(int position) {
+
+    }
 }

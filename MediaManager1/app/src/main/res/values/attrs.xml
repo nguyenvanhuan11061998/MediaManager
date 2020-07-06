@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UIButtonCustom">
+        <attr name="set_button_type">
+            <enum name="type1" value="1" />
+            <enum name="type2" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

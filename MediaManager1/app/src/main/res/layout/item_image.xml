@@ -36,11 +36,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.t3h.mediamanager1.Utils.SquareImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:thumb="@{item.getData()}"
-                    android:src="@drawable/ic_image_not_data"/>
+<!--                <com.t3h.mediamanager1.Utils.SquareImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:thumb="@{item.getData()}"-->
+<!--                    android:src="@drawable/ic_image_not_data"/>-->
 
                 <ImageView
                     android:layout_width="30dp"

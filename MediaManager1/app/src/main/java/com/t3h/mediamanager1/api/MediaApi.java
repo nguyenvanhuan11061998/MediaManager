@@ -19,5 +19,11 @@ public interface MediaApi {
     @POST("checkAccountExited.php")
     Call<SimpleResult> checkAccountExited(@Field("username") String username);
 
+    @FormUrlEncoded
+    @POST("registerAccount.php")
+    Call<SimpleResult> registerAccount(@Field("username") String username,
+                                       @Field("password") String password,
+                                       @Field("email") String email,
+                                       @Field("phone") String phone);
 
 }

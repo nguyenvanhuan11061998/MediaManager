@@ -20,9 +20,8 @@ public class StartActivity extends BaseActivity<ActivityStartBinding> {
 
     @Override
     protected void initAct() {
-        UserModel userModel = new UserModel();
-        userModel = ValidatorUtils.loadModel(this);
-        if (userModel.getUserName() != null){
+        UserModel userModel = ValidatorUtils.loadModel(this);
+        if (null != userModel.getUserName() && "" != userModel.getUserName()){
             check = true;
         } else {
             check = false;
@@ -33,10 +32,9 @@ public class StartActivity extends BaseActivity<ActivityStartBinding> {
             @Override
             public void run() {
                 if (check){
-                    intent = new Intent(StartActivity.this, LoginActivity.class);
+                    intent = new Intent(StartActivity.this, MainActivity.class);
                 } else {
-                    intent = new Intent(StartActivity.this, RegisterActivity.class);
-                    intent.putExtra(COME_FROM_START_ACT, true);
+                    intent = new Intent(StartActivity.this, LoginActivity.class);
                 }
                 startActivity(intent);
                 finish();

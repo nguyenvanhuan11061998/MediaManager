@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.fragment;
+package com.t3h.mediamanager1.yourfolder.image;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.t3h.mediamanager1.base.BaseAdapter;
 import com.t3h.mediamanager1.base.BaseFragment;
 import com.t3h.mediamanager1.databinding.FragmentYourImgBinding;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
+import com.t3h.mediamanager1.fragment.MediaListener;
 import com.t3h.mediamanager1.interfaceFragment.MyFmListener;
 import com.t3h.mediamanager1.models.Image;
 
@@ -78,8 +79,6 @@ public class FragmentMyImg extends BaseFragment<FragmentYourImgBinding> implemen
 
     @Override
     public boolean onItemMediaLongClick(Image image) {
-
-
 
         for (Image img:arrImage) {
             img.setDisplay(View.VISIBLE);

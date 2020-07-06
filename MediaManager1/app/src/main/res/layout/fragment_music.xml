@@ -54,64 +54,6 @@
             android:id="@+id/lv_music"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"></androidx.recyclerview.widget.RecyclerView>
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerHorizontal="true">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:padding="10dp">                   >
-
-                    <ImageView
-                        android:id="@+id/im_im1"
-                        android:layout_width="27dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/add_folder"/>
-                    <TextView
-                        android:layout_toRightOf="@+id/im_im1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="New Folder"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="15dp"
-                        android:layout_centerVertical="true"/>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="20dp">
-
-                    <ImageView
-                        android:id="@+id/im_im2"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/folder"/>
-                    <TextView
-                        android:layout_toRightOf="@+id/im_im2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Your Folder"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="15dp"
-                        android:layout_centerVertical="true"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
     </LinearLayout>
 
 </layout>

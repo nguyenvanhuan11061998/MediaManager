@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.video;
+package com.t3h.mediamanager1.media.video;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import com.t3h.mediamanager1.dialog.NewFolderDialog;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
 import com.t3h.mediamanager1.fragment.MediaListener;
 import com.t3h.mediamanager1.interfaceFragment.ClickFmListener;
+import com.t3h.mediamanager1.media.video.adapter.VideoAdapter;
+import com.t3h.mediamanager1.media.video.model.VideoModel;
 import com.t3h.mediamanager1.models.Video;
 
 import java.io.File;
@@ -27,14 +29,14 @@ import java.util.ArrayList;
 public class FragmentVideo extends BaseFragment<FragmentVideoBinding> implements MediaListener<Video>,  View.OnClickListener, ClickFmListener {
 
     public static final String EXTRA_PLAY_VIDEO = "extra_play_video";
-    private BaseAdapter<Video> adapter;
     private TextView tvCheckedAll;
     private CheckBox cbAllVideo;
     private LinearLayout ll_fm_video;
 
-    private ArrayList<Video> arrVideo;
+    private ArrayList<VideoModel> arrVideo;
     private NewFolderDialog newFolderDialog;
     private FileStorage fileStorage;
+    private VideoAdapter adapter;
 
     @Override
     protected int getLayoutId() {
@@ -59,13 +61,9 @@ public class FragmentVideo extends BaseFragment<FragmentVideoBinding> implements
         ll_fm_video.setVisibility(View.INVISIBLE);
 
         fileStorage = new FileStorage(getContext());
-        adapter = new BaseAdapter<>(getContext(),R.layout.item_video);
+        arrVideo = systemData.getVideoLocal();
+        adapter = new VideoAdapter(getContext(),arrVideo);
         binding.lvVideo.setAdapter(adapter);
-
-        arrVideo = systemData.getVideo();
-
-        adapter.setData(arrVideo);
-        adapter.setListener(this);
         binding.setListener(this);
 
         newFolderDialog = new NewFolderDialog(getContext());
@@ -87,9 +85,6 @@ public class FragmentVideo extends BaseFragment<FragmentVideoBinding> implements
         tvCheckedAll.setVisibility(View.VISIBLE);
         cbAllVideo.setVisibility(View.VISIBLE);
 
-        for (Video video1: arrVideo) {
-            video1.setDisplay(View.VISIBLE);
-        }
         adapter.notifyDataSetChanged();
 
 
@@ -109,57 +104,16 @@ public class FragmentVideo extends BaseFragment<FragmentVideoBinding> implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.cb_all_vid:
-                if (cbAllVideo.isChecked()){
-                    for (Video video: arrVideo) {
-                        video.setChecked(true);
-                    }
-                } else {
-                    for (Video video: arrVideo) {
-                        video.setChecked(false);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-                break;
-        }
+
     }
 
     @Override
     public void onClickHilder() {
-        boolean check = false;
-        for (Video video : arrVideo) {
-            if (video.getChecked()){
-                File file = new File(video.getData());
-                fileStorage.moveImgToInternal(file);
-                check = true;
-            }
-        }
-        if(check){
-            Toast.makeText(getContext(),"Đã dấu video", Toast.LENGTH_LONG).show();
-            initFm();
-        }else {
-            Toast.makeText(getContext(),"Chọn video để dấu",Toast.LENGTH_LONG).show();
-            return;
-        }
+
     }
 
     @Override
     public void onClickDelete() {
-        boolean check = false;
-        for (Video video : arrVideo) {
-            if (video.getChecked()){
-                File file = new File(video.getData());
-                check = true;
-                fileStorage.deleteFile(getContext(),file);
-            }
-        }
-        if (check == true){
-            Toast.makeText(getContext()," Đã xóa video", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(getContext(),"Chọn video để xóa",Toast.LENGTH_LONG).show();
-            return;
-        }
-        initFm();
+
     }
 }

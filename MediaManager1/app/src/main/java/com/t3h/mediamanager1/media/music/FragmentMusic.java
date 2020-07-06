@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.music;
+package com.t3h.mediamanager1.media.music;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -11,14 +11,16 @@ import com.t3h.mediamanager1.base.BaseAdapter;
 import com.t3h.mediamanager1.base.BaseFragment;
 import com.t3h.mediamanager1.databinding.FragmentMusicBinding;
 import com.t3h.mediamanager1.fragment.MediaListener;
+import com.t3h.mediamanager1.media.music.adapter.MusicAdapter;
+import com.t3h.mediamanager1.media.music.model.MusicModel;
 import com.t3h.mediamanager1.models.Music;
 
 import java.util.ArrayList;
 
-public class FragmentMusic extends BaseFragment<FragmentMusicBinding> implements MediaListener<Music>, View.OnClickListener {
+public class FragmentMusic extends BaseFragment<FragmentMusicBinding> implements MediaListener<Music>, View.OnClickListener, MusicAdapter.onClickItemMusic {
 
-    private BaseAdapter<Music> adapter;
-    ArrayList<Music> arrMusic;
+    private MusicAdapter adapter;
+    ArrayList<MusicModel> arrMusic;
     private TextView tvAllMusic;
     private CheckBox cbAllMusic;
 
@@ -35,33 +37,23 @@ public class FragmentMusic extends BaseFragment<FragmentMusicBinding> implements
         tvAllMusic = findViewById(R.id.tv_checked_all_music);
         cbAllMusic = findViewById(R.id.cb_all_music);
 
-        adapter = new BaseAdapter<>(getContext(),R.layout.item_music);
+        arrMusic = systemData.getMusicLocal();
+        adapter = new MusicAdapter(getContext(),arrMusic);
         binding.lvMusic.setAdapter(adapter);
-
-        arrMusic = systemData.getMusic();
-
-        adapter.setData(arrMusic);
-        adapter.setListener(this);
         cbAllMusic.setOnClickListener(this);
+
+        adapter.setClickItemMusic(this);
     }
 
     @Override
     public void onItemMediaClick(Music music) {
-        app.getService().setArrMusic(adapter.getData());
-        int index = adapter.getData().indexOf(music);
+        app.getService().setArrMusic(adapter.getArrMusic());
+        int index = adapter.getArrMusic().indexOf(music);
         app.getService().create(index);
     }
 
     @Override
     public boolean onItemMediaLongClick(Music music) {
-
-        tvAllMusic.setVisibility(View.VISIBLE);
-        cbAllMusic.setVisibility(View.VISIBLE);
-
-        for (Music music1 : arrMusic){
-            music1.setDisplay(View.VISIBLE);
-        }
-        adapter.notifyDataSetChanged();
 
         return false;
     }
@@ -80,21 +72,13 @@ public class FragmentMusic extends BaseFragment<FragmentMusicBinding> implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.cb_all_music:
-                if (cbAllMusic.isChecked()){
-                    for (Music music : arrMusic) {
-                        music.setChecked(true);
-                    }
-                }else {
-                    for (Music music: arrMusic) {
-                        music.setChecked(false);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-                break;
-        }
     }
 
 
+    @Override
+    public void onClickItemMusic(MusicModel musicModel) {
+        app.getService().setArrMusic(adapter.getArrMusic());
+        int index = adapter.getArrMusic().indexOf(musicModel);
+        app.getService().create(index);
+    }
 }

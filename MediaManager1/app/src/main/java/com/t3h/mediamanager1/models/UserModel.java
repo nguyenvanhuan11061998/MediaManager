@@ -19,7 +19,7 @@ public class UserModel {
     private String mEmail;
 
     public String getUserName() {
-        return userName;
+        return userName == null ? "" : userName;
     }
 
     public void setUserName(String userName) {
@@ -27,7 +27,7 @@ public class UserModel {
     }
 
     public String getPassword() {
-        return password;
+        return password == null ? "" : password;
     }
 
     public void setPassword(String password) {
@@ -35,7 +35,7 @@ public class UserModel {
     }
 
     public String getmPhone() {
-        return mPhone;
+        return mPhone == null ? "" : mPhone;
     }
 
     public void setmPhone(String mPhone) {
@@ -43,7 +43,7 @@ public class UserModel {
     }
 
     public String getmEmail() {
-        return mEmail;
+        return mEmail == null ? "" : mEmail;
     }
 
     public void setmEmail(String mEmail) {

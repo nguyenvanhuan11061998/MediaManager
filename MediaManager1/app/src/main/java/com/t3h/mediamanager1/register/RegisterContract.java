@@ -8,9 +8,14 @@ public interface RegisterContract {
         void onAccountNotExited();
         void onAccountExited(String messager);
         void callApiFailed();
+
+        void onRegisterNewAccountSuccess(String message);
+        void onRegisterNewAccountFailed(String message);
+        void onRegisterNewAccountFailed();
     }
 
     interface Presenter {
         void callApiCheckAccount(String username);
+        void callApiRegisterNewAccount(String username, String password, String email, String phone);
     }
 }

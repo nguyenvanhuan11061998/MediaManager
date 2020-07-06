@@ -13,11 +13,11 @@ import com.t3h.mediamanager1.R;
 import com.t3h.mediamanager1.base.BaseActivity;
 import com.t3h.mediamanager1.databinding.ActivityPlayImageBinding;
 import com.t3h.mediamanager1.fileStorage.FileStorage;
-import com.t3h.mediamanager1.fragment.FragmentMyImg;
-import com.t3h.mediamanager1.image.ImageHomeFragment;
+import com.t3h.mediamanager1.yourfolder.image.FragmentMyImg;
+import com.t3h.mediamanager1.media.image.ImageHomeFragment;
 import com.t3h.mediamanager1.fragment.FragmentImagePlay;
-import com.t3h.mediamanager1.fragment.FragmentMyVideo;
-import com.t3h.mediamanager1.video.FragmentVideo;
+import com.t3h.mediamanager1.yourfolder.video.FragmentMyVideo;
+import com.t3h.mediamanager1.media.video.FragmentVideo;
 import com.t3h.mediamanager1.fragment.FragmentVideoPlay;
 
 
