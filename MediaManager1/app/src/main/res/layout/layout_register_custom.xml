@@ -15,7 +15,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:paddingTop="16dp"
-        android:text="@string/create_account"
+        android:text="@string/tao_tai_khoan"
         android:textColor="@color/colorBlue"
         android:textSize="20sp" />
 
@@ -28,7 +28,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_round_corner_edittext"
-        android:hint="Username"
+        android:hint="@string/ten_dang_nhap"
         android:padding="16dp"
         android:textSize="12sp"
         android:clickable="true"
@@ -66,7 +66,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_round_corner_edittext"
-        android:hint="Password"
+        android:hint="@string/mat_khau"
         android:padding="16dp"
         android:textSize="12sp"
         android:inputType="textPassword"/>
@@ -92,7 +92,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_round_corner_edittext"
-        android:hint="@string/reset_password"
+        android:hint="@string/xac_nhan_mat_khau"
         android:padding="16dp"
         android:textSize="12sp"
         android:inputType="textPassword"/>
@@ -117,7 +117,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_round_corner_edittext"
-        android:hint="@string/your_phone"
+        android:hint="@string/so_dien_thoai"
         android:padding="16dp"
         android:textSize="12sp"
         android:inputType="number"/>
@@ -142,7 +142,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/custom_round_corner_edittext"
-        android:hint="@string/your_email"
+        android:hint="@string/email"
         android:padding="16dp"
         android:textSize="12sp" />
 
@@ -163,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/custom_round_corner_button"
-        android:text="@string/Sign_up"
+        android:text="@string/dang_ky"
         android:textAllCaps="false"
         android:textColor="@color/colorWhile"
         android:textSize="13sp" />
@@ -174,7 +174,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/tv_sign_up"
-        android:text="@string/or_sign_up_with"
+        android:text="@string/tao_tai_khoan_voi"
         android:textColor="@color/colorBlue"
         android:textSize="12sp"
         android:paddingBottom="10dp"/>

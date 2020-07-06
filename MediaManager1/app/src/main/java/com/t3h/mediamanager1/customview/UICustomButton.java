@@ -51,14 +51,14 @@ public class UICustomButton extends AppCompatButton {
 
     }
 
-    private void statusDisable() {
+    public void statusDisable() {
         this.setEnabled(false);
         this.setTextColor(Color.WHITE);
         setBackgroundCompat(mNormalDrawable);
         this.setBackgroundResource(R.drawable.custom_round_corner_button_disable_v2);
     }
 
-    private void statusActive() {
+    public void statusActive() {
         this.setEnabled(true);
         this.setTextColor(Color.WHITE);
         setBackgroundCompat(mNormalDrawable);

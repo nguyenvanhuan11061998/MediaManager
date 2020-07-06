@@ -36,6 +36,7 @@ import com.t3h.mediamanager1.models.UserModel;
 import com.t3h.mediamanager1.media.music.FragmentMusic;
 import com.t3h.mediamanager1.fragment.FragmentStart;
 import com.t3h.mediamanager1.media.video.FragmentVideo;
+import com.t3h.mediamanager1.register.change_password.ChangePasswordActivity;
 import com.t3h.mediamanager1.service.MusicService;
 
 import butterknife.BindView;
@@ -201,16 +202,24 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements N
         }
     }
 
-    @OnClick({R.id.ll_logout, R.id.img_drawer_menu})
+    @OnClick({R.id.ll_logout, R.id.ll_change_password, R.id.img_drawer_menu})
     void onClick(View view){
         switch (view.getId()){
             case R.id.ll_logout:
                 goToLogout();
                 break;
+            case R.id.ll_change_password:
+                goToChangePassword();
+                break;
             case R.id.img_drawer_menu:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
         }
+    }
+
+    private void goToChangePassword() {
+        Intent intent = new Intent(this, ChangePasswordActivity.class);
+        startActivity(intent);
     }
 
     private void goToLogout() {
