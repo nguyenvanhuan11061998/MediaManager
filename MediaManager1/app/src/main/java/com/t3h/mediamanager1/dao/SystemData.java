@@ -1,6 +1,7 @@
 package com.t3h.mediamanager1.dao;
 
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -8,8 +9,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.t3h.mediamanager1.media.image.model.ImageHomeModel;
-import com.t3h.mediamanager1.media.music.model.MusicModel;
+import com.t3h.mediamanager1.media.music.MusicModel;
 import com.t3h.mediamanager1.media.video.model.VideoModel;
+import com.t3h.mediamanager1.models.Album;
 import com.t3h.mediamanager1.models.AlbumMusic;
 import com.t3h.mediamanager1.models.FieldInfo;
 import com.t3h.mediamanager1.models.Image;
@@ -22,6 +24,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class SystemData {
+
+    private static Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
 
     private ContentResolver resolver;
 
@@ -45,7 +49,6 @@ public class SystemData {
         Cursor cursor = resolver.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,null,null,null,null);
         ArrayList<AlbumMusic> arr = getData(cursor,AlbumMusic.class);
 
-        Log.e("=========== ",arr.size()+"");
 
         return arr;
     }
@@ -238,7 +241,8 @@ public class SystemData {
                 MediaStore.Audio.Media.DURATION,
                 MediaStore.Audio.Media.SIZE,
                 MediaStore.Audio.Media.ARTIST,
-                MediaStore.Audio.Media.ALBUM};
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.ALBUM_ID};
         final String orderBy = MediaStore.Audio.Media._ID;
 
         Cursor cursor = resolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,columns,null,null,orderBy);
@@ -251,11 +255,11 @@ public class SystemData {
                 cursor.moveToPosition(i);
                 MusicModel music = new MusicModel();
 
-                int dataColumnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                int dataColumnIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DATA);
                 int displayNameColumnIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME);
                 int durationIndex = cursor.getColumnIndex(MediaStore.Audio.Media.DURATION);
-                int artistIndex = cursor.getColumnIndex(MediaStore.Video.Media.ARTIST);
-                int albumIndex = cursor.getColumnIndex(MediaStore.Video.Media.ALBUM);
+                int artistIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST);
+                int albumIndex = cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID);
 
                 music.setUri(Uri.parse(cursor.getString(dataColumnIndex)));
                 File fileToUpload = new File(music.getUri().getPath());
@@ -264,8 +268,11 @@ public class SystemData {
                 music.setSize(fileToUpload.length());
                 music.setDuration(cursor.getLong(durationIndex));
                 music.setArtist(cursor.getString(artistIndex));
-                music.setAlbumId(cursor.getString(albumIndex));
                 music.setData(cursor.getString(dataColumnIndex));
+
+                long some = cursor.getLong(albumIndex);
+                Uri uri = ContentUris.withAppendedId(sArtworkUri, some);
+                music.setImage(uri.toString());
 
                 if (fileToUpload.exists()){
                     arrMusic.add(music);
@@ -275,9 +282,37 @@ public class SystemData {
                 e.printStackTrace();
             }
         }
-
         cursor.close();
-
         return arrMusic;
+    }
+
+    private ArrayList<Album> getAbumMusic(){
+        final String[] columns = {
+                MediaStore.Audio.Albums._ID,
+                MediaStore.Audio.Albums.ALBUM_ART};
+
+        Cursor cursor = resolver.query(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,null,null,null,null);
+        ArrayList<Album> albums = new ArrayList<>();
+        int count = cursor.getCount();
+        for (int i = 0; i < count; i++) {
+            try {
+                cursor.moveToPosition(i);
+                Album album = new Album();
+                int indexColumnId = cursor.getColumnIndex(MediaStore.Audio.Albums._ID);
+                int indexColumnAlbumArt = cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
+
+                album.setId(cursor.getLong(indexColumnId));
+                album.setImage(cursor.getString(indexColumnAlbumArt));
+
+                albums.add(album);
+
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        cursor.close();
+        return albums;
+
     }
 }

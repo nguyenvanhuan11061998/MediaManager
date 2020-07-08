@@ -1,8 +1,6 @@
-package com.t3h.mediamanager1.media.music.model;
+package com.t3h.mediamanager1.media.music;
 
 import android.net.Uri;
-
-import com.t3h.mediamanager1.media.music.contract.MusicContract;
 
 public class MusicModel implements MusicContract.Model {
     private String name;
@@ -11,8 +9,17 @@ public class MusicModel implements MusicContract.Model {
     private Uri uri;
     private long size;
     private String artist;
-    private String albumId;
+    private long albumId;
     private String data;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getData() {
         return data;
@@ -70,11 +77,11 @@ public class MusicModel implements MusicContract.Model {
         this.artist = artist;
     }
 
-    public String getAlbumId() {
-        return albumId == null ? "" : albumId;
+    public long getAlbumId() {
+        return albumId;
     }
 
-    public void setAlbumId(String albumId) {
+    public void setAlbumId(long albumId) {
         this.albumId = albumId;
     }
 }

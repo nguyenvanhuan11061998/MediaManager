@@ -1,8 +1,6 @@
 package com.t3h.mediamanager1.media.music.adapter;
 
-import android.content.ContentUris;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +16,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.t3h.mediamanager1.R;
 import com.t3h.mediamanager1.Utils.SquareImageView;
-import com.t3h.mediamanager1.media.music.model.MusicModel;
+import com.t3h.mediamanager1.media.music.MusicModel;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -87,7 +84,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
         }
 
         public void binData(MusicModel musicModel) {
-            Glide.with(context).load(new File(musicModel.getUri().toString()))
+            Glide.with(context).load(musicModel.getImage())
                     .apply(new RequestOptions().transforms(new CenterCrop(), new RoundedCorners(18)))
                     .error(R.drawable.ic_music_not_data)
                     .into(musicImage);

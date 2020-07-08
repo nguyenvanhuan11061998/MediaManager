@@ -1,4 +1,4 @@
-package com.t3h.mediamanager1.media.music.contract;
+package com.t3h.mediamanager1.media.music;
 
 public interface MusicContract {
     interface Model {

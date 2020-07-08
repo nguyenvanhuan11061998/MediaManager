@@ -7,12 +7,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.t3h.mediamanager1.R;
-import com.t3h.mediamanager1.base.BaseAdapter;
+import com.t3h.mediamanager1.activity.MainActivity;
 import com.t3h.mediamanager1.base.BaseFragment;
 import com.t3h.mediamanager1.databinding.FragmentMusicBinding;
 import com.t3h.mediamanager1.fragment.MediaListener;
 import com.t3h.mediamanager1.media.music.adapter.MusicAdapter;
-import com.t3h.mediamanager1.media.music.model.MusicModel;
 import com.t3h.mediamanager1.models.Music;
 
 import java.util.ArrayList;

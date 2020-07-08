@@ -19,8 +19,7 @@ import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.t3h.mediamanager1.R;
-import com.t3h.mediamanager1.media.music.model.MusicModel;
-import com.t3h.mediamanager1.models.Music;
+import com.t3h.mediamanager1.media.music.MusicModel;
 
 import java.util.ArrayList;
 
@@ -36,15 +35,12 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     private MutableLiveData<Boolean> isPlaying = new MutableLiveData<>();                           //lấy trạng thái playing để hiển thị button pause/play
     private MutableLiveData<String> name = new MutableLiveData<>();                                 //lấy tên bài hát đang hiển thị hiện tại
     private MutableLiveData<Boolean> isLife = new MutableLiveData<>();                              //lấy trạng thái có bài hát nào đang trong danh sách phát hay không
-
     public MutableLiveData<Boolean> getIsLife() {
         return isLife;
     }
-
     public MutableLiveData<Boolean> getIsPlaying() {
         return isPlaying;
     }
-
     public MutableLiveData<String> getName() {
         return name;
     }
@@ -136,7 +132,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         if(player != null){
             player.pause();
             isPlaying.postValue(false);
-
             pushNotification();
         }
     }
